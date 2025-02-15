@@ -164,15 +164,15 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 color = 65280,
                 footer = new
                 
-                {
+                /*{
                     text = $"{Localizer["Discord.Footer"]}"
-                }
+                }*/
             };
 
-            /*var payload = new
+            var payload = new
             {
                 embeds = new[] { embed }
-            };*/
+            };
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
