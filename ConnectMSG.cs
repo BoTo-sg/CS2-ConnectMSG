@@ -63,7 +63,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             LoopConnections.Remove(steamid);
         }
 
-        Console.WriteLine($"[{ModuleName}] {Name} has connected!");
+        //Console.WriteLine($"[{ModuleName}] {Name} has connected!");
         Server.PrintToChatAll($"{Localizer["playerconnect", Name, steamid2, country]}");
 
         if (Config.LogMessagesToDiscord)
@@ -121,7 +121,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         info.DontBroadcast = true;
 
-        Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
+        //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
         Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
 
         if (Config.LogMessagesToDiscord)
