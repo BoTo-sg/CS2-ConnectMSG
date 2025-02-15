@@ -154,37 +154,43 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
     public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, string country)
     {
-        using (var httpClient = new HttpClient())
+        try
         {
-            var embed = new
+            using (var httpClient = new HttpClient())
             {
-                type = "rich",
-                title = $"{Localizer["Discord.ConnectTitle", playerName]}",
-                url = $"https://steamcommunity.com/profiles/{steamID}",
-                description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
-                //color = 65280
-                //footer = new
+                var embed = new
+                {
+                    type = "rich",
+                    title = $"{Localizer["Discord.ConnectTitle", playerName]}",
+                    url = $"https://steamcommunity.com/profiles/{steamID}",
+                    description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
+                    color = 65280
+                    //footer = new
                 
-                /*{
-                    text = $"{Localizer["Discord.Footer"]}"
-                }*/
-            };
+                    /*{
+                        text = $"{Localizer["Discord.Footer"]}"
+                    }*/
+                };
 
-            var payload = new
-            {
-                embeds = new[] { embed }
-            };
+                var payload = new
+                {
+                    embeds = new[] { embed }
+                };
 
-            var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
-            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
+                var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                Logger.LogInformation($"Failed to send message to Discord! code: {response.StatusCode}");
-            }
+                if (!response.IsSuccessStatusCode)
+                {
+                    Logger.LogInformation($"Failed to send message to Discord! code: {response.StatusCode}");
+                }
+        }      
+        catch
+        {
+        
         }
-    }
+}
 
     public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, int reason, string country)
     {
