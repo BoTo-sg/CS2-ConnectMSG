@@ -185,8 +185,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 {
                     Logger.LogInformation($"Failed to send message to Discord! code: {response.StatusCode}");
                 }
-            });
-        }      
+            }
+        }
         catch
         {
         
