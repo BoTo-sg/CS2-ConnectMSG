@@ -44,7 +44,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         Logger.LogInformation($"loaded successfully! (Version {ModuleVersion})");
     }
 
-    [GameEventHandler(HookMode.Pre)]
+    [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
         if (@event == null) return HookResult.Handled;
@@ -85,15 +85,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
     [GameEventHandler(HookMode.Pre)]
     public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
-    {
-        if (@event == null) return HookResult.Handled;
-        
-        info.DontBroadcast = true;
-        return HookResult.Handled;
-    }
-
-    [GameEventHandler(HookMode.Pre)]
-    public HookResult OnPlayerDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
     {
         if (@event == null) return HookResult.Handled;
         var player = @event.Userid;
