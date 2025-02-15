@@ -126,7 +126,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (Config.LogMessagesToDiscord)
         {
-            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, reason, country);
+            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, country, reason);
         }
 
         return HookResult.Handled;
