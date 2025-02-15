@@ -51,15 +51,16 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var player = @event.Userid;
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
+        var steamid = player.SteamID;
         var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
-        if (LoopConnections.ContainsKey(steamid2))
+        if (LoopConnections.ContainsKey(steamid))
         {
-            LoopConnections.Remove(steamid2);
+            LoopConnections.Remove(steamid);
         }
 
         Console.WriteLine($"[{ModuleName}] {Name} has connected!");
