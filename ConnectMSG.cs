@@ -21,8 +21,8 @@ public class ConnectMSGConfig : BasePluginConfig
     [JsonPropertyName("Timer")] public float Timer { get; set; } = 5.0f;
     [JsonPropertyName("LogMessagesToDiscord")] public bool LogMessagesToDiscord { get; set; } = true;
     [JsonPropertyName("DiscordWebhook")] public string DiscordWebhook { get; set; } = "";
-
 }
+
 public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 {
     public override string ModuleName => "ConnectMSG";
@@ -38,6 +38,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     {
         Config = config;
     }
+
     public override void Load(bool hotReload)
     {
         Logger.LogInformation($"loaded successfully! (Version {ModuleVersion})");
@@ -48,9 +49,11 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     {
         if (@event == null) return HookResult.Handled;
         var player = @event.Userid;
+
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var steamid = player.SteamID;
         var Name = player.PlayerName;
+
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
@@ -76,7 +79,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             });
         }
 
-
         return HookResult.Handled;
     }
 
@@ -84,9 +86,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
     {
         if (@event == null) return HookResult.Handled;
+        
         info.DontBroadcast = true;
-
-
         return HookResult.Handled;
     }
 
@@ -95,38 +96,39 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     {
         if (@event == null) return HookResult.Handled;
         var player = @event.Userid;
+
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var reason = @event.Reason;
         var Name = player.PlayerName;
+
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
-
         if (reason == 54 || reason == 55 || reason == 57)
+        {
+            if (!LoopConnections.ContainsKey(player.SteamID))
             {
-                if (!LoopConnections.ContainsKey(player.SteamID))
-                {
-                   LoopConnections.Add(player.SteamID, true);
-                }
-                if (LoopConnections.ContainsKey(player.SteamID))
-                {
-                   return HookResult.Handled;
-                }
-
+                LoopConnections.Add(player.SteamID, true);
             }
+            
+            if (LoopConnections.ContainsKey(player.SteamID))
+            {
+                return HookResult.Handled;
+            }
+        }
+
         info.DontBroadcast = true;
 
         Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
         Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, country]}");
 
-        if (Config.LogMessagesToDiscord) {
-            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, playerip, country);
+        if (Config.LogMessagesToDiscord)
+        {
+            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, reason.NetworkDisconnectionReason, country);
         }
-
 
         return HookResult.Handled;
     }
-
 
     public string GetCountry(string ipAddress)
     {
@@ -136,10 +138,12 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             var response = reader.Country(ipAddress);
             return response?.Country?.IsoCode ?? "Unknown";
         }
+        
         catch (AddressNotFoundException)
         {
             return "Unknown";
         }
+
         catch
         {
             return "Unknown";
@@ -157,6 +161,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 description = $"{Localizer["Discord.ConnectDescription", country, steamID, playerip]}",
                 color = 65280,
                 footer = new
+                
                 {
                     text = $"{Localizer["Discord.Footer"]}"
                 }
@@ -189,6 +194,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, playerip]}",
                 color = 16711680,
+                
                 footer = new
                 {
                     text = $"{Localizer["Discord.Footer"]}"
@@ -211,5 +217,4 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             }
         }
     }
-
 }
