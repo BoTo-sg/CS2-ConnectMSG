@@ -163,10 +163,10 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
                 color = 65280,
 
-                footer = new
+                /*footer = new
                 {
                     text = $"{Localizer["Discord.Footer"]}"
-                }
+                }*/
             };
 
             var payload = new
@@ -196,10 +196,10 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
                 color = 16711680,
 
-                footer = new
+                /*footer = new
                 {
                     text = $"{Localizer["Discord.Footer"]}"
-                }
+                }*/
             };
 
             var payload = new
