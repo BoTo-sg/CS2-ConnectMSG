@@ -102,7 +102,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
-        string disconnectReason = GetDisconnectReasonString(reason);
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
         if (reason == 54 || reason == 55 || reason == 57)
@@ -125,7 +124,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (Config.LogMessagesToDiscord)
         {
-            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, disconnectReason, country);
+            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, reason, country);
         }
 
         return HookResult.Handled;
@@ -151,7 +150,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
     }
 
-    public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, string reason, string country)
+    public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, int reason, string country)
     {
         using (var httpClient = new HttpClient())
         {
