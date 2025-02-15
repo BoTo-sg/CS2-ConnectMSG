@@ -195,8 +195,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
                 color = 16711680,
+
                 footer = new
-                
                 {
                     text = $"{Localizer["Discord.Footer"]}"
                 }
