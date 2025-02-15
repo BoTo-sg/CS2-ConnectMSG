@@ -102,7 +102,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
-        string disconnectReason = NetworkDisconnectionReasonHelper.GetDisconnectReasonString(reason);
+        string disconnectReason = GetDisconnectReasonString(reason);
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
         if (reason == 54 || reason == 55 || reason == 57)
