@@ -185,7 +185,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
     }
 
-    public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, int reason, string country)
+    public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, string country, int reason)
     {
         using (var httpClient = new HttpClient())
         {
