@@ -160,7 +160,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             {
                 title = $"{Localizer["Discord.ConnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
-                description = $"{Localizer["Discord.ConnectDescription", country, steamID, playerip]}",
+                description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
                 color = 65280,
 
                 footer = new
