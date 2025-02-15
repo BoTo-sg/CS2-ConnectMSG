@@ -154,42 +154,34 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
     public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, string country)
     {
-        try
+        using (var httpClient = new HttpClient())
         {
-            using (var httpClient = new HttpClient())
+            var embed = new
             {
-                var embed = new
-                {
-                    type = "rich",
-                    title = $"{Localizer["Discord.ConnectTitle", playerName]}",
-                    url = $"https://steamcommunity.com/profiles/{steamID}",
-                    description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
-                    color = 65280
-                    //footer = new
-                
-                    /*{
-                        text = $"{Localizer["Discord.Footer"]}"
-                    }*/
-                };
+                title = $"{Localizer["Discord.ConnectTitle", playerName]}",
+                url = $"https://steamcommunity.com/profiles/{steamID}",
+                description = $"{Localizer["Discord.ConnectDescription", country, steamID, playerip]}",
+                color = 65280,
 
-                var payload = new
+                footer = new
                 {
-                    embeds = new[] { embed }
-                };
-
-                var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
-                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    Logger.LogInformation($"Failed to send message to Discord! code: {response.StatusCode}");
+                    text = $"{Localizer["Discord.Footer"]}"
                 }
+            };
+
+            var payload = new
+            {
+                embeds = new[] { embed }
+            };
+
+            var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Logger.LogInformation($"Failed to send message to Discord! code: {response.StatusCode}");
             }
-        }
-        catch
-        {
-        
         }
     }
 
@@ -199,16 +191,15 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         {
             var embed = new
             {
-                type = "rich",
                 title = $"{Localizer["Discord.DisconnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
-                color = 16711680
+                color = 16711680,
+                footer = new
                 
-                /*footer = new
                 {
                     text = $"{Localizer["Discord.Footer"]}"
-                }*/
+                }
             };
 
             var payload = new
