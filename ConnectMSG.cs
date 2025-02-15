@@ -169,10 +169,10 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 }
             };
 
-            var payload = new
+            /*var payload = new
             {
                 embeds = new[] { embed }
-            };
+            };*/
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
@@ -197,10 +197,10 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
                 color = 16711680,
                 
-                footer = new
+                /*footer = new
                 {
                     text = $"{Localizer["Discord.Footer"]}"
-                }
+                }*/
             };
 
             var payload = new
