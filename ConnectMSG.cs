@@ -122,11 +122,12 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
-        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country]}");
+        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
+        Console.WriteLine($"[{ModuleName}] {Name} [{steamdid}] has disconnected from {country} ({reason}!");
 
         if (Config.LogMessagesToDiscord)
         {
-            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, country, reason);
+            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, country);
         }
 
         return HookResult.Handled;
