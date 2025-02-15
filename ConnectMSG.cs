@@ -39,11 +39,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         Config = config;
     }
 
-    public override void Load(bool hotReload)
-    {
-        Logger.LogInformation($"loaded successfully! (Version {ModuleVersion})");
-    }
-
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
@@ -114,7 +109,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
         Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
-        Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country})!");
+        Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country} ({reason})!");
 
         if (Config.LogMessagesToDiscord)
         {
