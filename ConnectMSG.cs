@@ -123,7 +123,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
         Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
-        Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country} ({reason})!");
+        Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country})!");
 
         if (Config.LogMessagesToDiscord)
         {
