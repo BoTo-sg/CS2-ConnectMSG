@@ -67,7 +67,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (Config.LogMessagesToDiscord)
         {
-            _ = SendWebhookMessageAsEmbedConnected(player.PlayerName, player.SteamID, playerip, country);
+            _ = SendWebhookMessageAsEmbedConnected(player.PlayerName, player.SteamID, country);
         }
 
         if (Config.PlayerWelcomeMessage)
@@ -150,7 +150,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
     }
 
-    public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, string playerip, string country)
+    public async Task SendWebhookMessageAsEmbedConnected(string playerName, ulong steamID, string country)
     {
         using (var httpClient = new HttpClient())
         {
@@ -158,7 +158,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             {
                 title = $"{Localizer["Discord.ConnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
-                description = $"{Localizer["Discord.ConnectDescription", country, steamID, reason]}",
+                description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
                 color = 65280,
                 footer = new
                 
