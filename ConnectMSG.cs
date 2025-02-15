@@ -50,7 +50,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             return HookResult.Continue;
 
         var steamid = player.SteamID;
-        var steamid2 = player.AuthorizedSteamID.SteamId2;
+        var steamid2 (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
@@ -93,7 +93,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             return HookResult.Continue;
 
         var reason = @event.Reason;
-        var steamid2 = player.AuthorizedSteamID.SteamId2;
+        var steamid2 (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
