@@ -51,7 +51,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var player = @event.Userid;
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
-        var steamid = player.SteamID;
+        var steamid = player.SteamID2;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
@@ -99,7 +99,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var reason = @event.Reason;
-        var steamid = player.SteamID;
+        var steamid = player.SteamID2;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
