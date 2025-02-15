@@ -122,7 +122,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
-        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
+        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
@@ -185,7 +185,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
     }
 
-    public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, string country, int reason)
+    //public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, string country, int reason)
+    public async Task SendWebhookMessageAsEmbedDisconnected(string playerName, ulong steamID, string country)
     {
         using (var httpClient = new HttpClient())
         {
@@ -193,7 +194,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             {
                 title = $"{Localizer["Discord.DisconnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
-                description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
+                description = $"{Localizer["Discord.DisconnectDescription", country, steamID]}",
                 color = 16711680
 
                 /*footer = new
