@@ -158,6 +158,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         {
             var embed = new
             {
+                type = "rich",
                 title = $"{Localizer["Discord.ConnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
@@ -191,6 +192,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         {
             var embed = new
             {
+                type = "rich",
                 title = $"{Localizer["Discord.DisconnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
