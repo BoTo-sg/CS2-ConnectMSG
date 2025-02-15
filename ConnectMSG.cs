@@ -51,19 +51,19 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var player = @event.Userid;
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
-        var steamid = player.SteamID2;
+        var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
-        if (LoopConnections.ContainsKey(steamid))
+        if (LoopConnections.ContainsKey(steamid2))
         {
-            LoopConnections.Remove(steamid);
+            LoopConnections.Remove(steamid2);
         }
 
         Console.WriteLine($"[{ModuleName}] {Name} has connected!");
-        Server.PrintToChatAll($"{Localizer["playerconnect", Name, steamid, country]}");
+        Server.PrintToChatAll($"{Localizer["playerconnect", Name, steamid2, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
@@ -99,7 +99,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var reason = @event.Reason;
-        var steamid = player.SteamID2;
+        var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
@@ -121,7 +121,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
-        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid, country, reason]}");
+        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, reason]}");
 
         if (Config.LogMessagesToDiscord)
         {
