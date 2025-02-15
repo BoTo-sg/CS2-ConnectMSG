@@ -136,7 +136,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     {
         try
         {
-            using var reader = new DatabaseReader(Path.Combine(ModuleDirectory, "GeoLite2-Country.mmdb"));
+            using var reader = new DatabaseReader(Path.Combine(ModuleDirectory, "GeoLite2-City.mmdb"));
             var response = reader.City(ipAddress);
             return response?.Country?.Name ?? "Unknown Country";
         }
