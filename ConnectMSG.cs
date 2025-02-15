@@ -63,7 +63,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
 
         Console.WriteLine($"[{ModuleName}] {Name} has connected!");
-        Server.PrintToChatAll($"{Localizer["playerconnect", Name, player.SteamID, country]}");
+        Server.PrintToChatAll($"{Localizer["playerconnect", Name, steamid, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
@@ -99,6 +99,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var reason = @event.Reason;
+        var steamid = player.SteamID;
         var Name = player.PlayerName;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
@@ -120,7 +121,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
-        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, player.SteamID, country]}");
+        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
