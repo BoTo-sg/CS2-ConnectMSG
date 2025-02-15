@@ -14,7 +14,6 @@ using System.Xml.Linq;
 
 namespace ConnectMSG;
 
-[MinimumApiVersion(247)]
 public class ConnectMSGConfig : BasePluginConfig
 {
     //[JsonPropertyName("PlayerWelcomeMessage")] public bool PlayerWelcomeMessage { get; set; } = true;
@@ -42,10 +41,14 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
-        if (@event == null) return HookResult.Continue;
+        if (@event == null) return
+            HookResult.Continue;
+
         var player = @event.Userid;
 
-        if (player == null || !player.IsValid || player.IsBot) return HookResult.Continue;
+        if (player == null || !player.IsValid || player.IsBot)
+            return HookResult.Continue;
+
         var steamid = player.SteamID;
         var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
@@ -81,10 +84,14 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     [GameEventHandler(HookMode.Pre)]
     public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
     {
-        if (@event == null) return HookResult.Continue;
+        if (@event == null)
+            return HookResult.Continue;
+
         var player = @event.Userid;
 
-        if (player == null || !player.IsValid || player.IsBot) return HookResult.Continue;
+        if (player == null || !player.IsValid || player.IsBot)
+            return HookResult.Continue;
+
         var reason = @event.Reason;
         var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
