@@ -17,8 +17,8 @@ namespace ConnectMSG;
 [MinimumApiVersion(247)]
 public class ConnectMSGConfig : BasePluginConfig
 {
-    [JsonPropertyName("PlayerWelcomeMessage")] public bool PlayerWelcomeMessage { get; set; } = true;
-    [JsonPropertyName("Timer")] public float Timer { get; set; } = 5.0f;
+    //[JsonPropertyName("PlayerWelcomeMessage")] public bool PlayerWelcomeMessage { get; set; } = true;
+    //[JsonPropertyName("Timer")] public float Timer { get; set; } = 5.0f;
     [JsonPropertyName("LogMessagesToDiscord")] public bool LogMessagesToDiscord { get; set; } = true;
     [JsonPropertyName("DiscordWebhook")] public string DiscordWebhook { get; set; } = "";
 }
@@ -42,10 +42,10 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
-        if (@event == null) return HookResult.Handled;
+        if (@event == null) return HookResult.Continue;
         var player = @event.Userid;
 
-        if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
+        if (player == null || !player.IsValid || player.IsBot) return HookResult.Continue;
         var steamid = player.SteamID;
         var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
@@ -66,25 +66,25 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             _ = SendWebhookMessageAsEmbedConnected(player.PlayerName, player.SteamID, country);
         }
 
-        if (Config.PlayerWelcomeMessage)
+        /*if (Config.PlayerWelcomeMessage)
         {
             AddTimer(Config.Timer, () =>
             {
                 player.PrintToChat($"{Localizer["playerwelcomemsg", Name]}");
                 player.PrintToChat($"{Localizer["playerwelcomemsgnextline"]}");
             });
-        }
+        }*/
 
-        return HookResult.Handled;
+        HookResult.Continue;
     }
 
     [GameEventHandler(HookMode.Pre)]
     public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
     {
-        if (@event == null) return HookResult.Handled;
+        if (@event == null) return HookResult.Continue;
         var player = @event.Userid;
 
-        if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
+        if (player == null || !player.IsValid || player.IsBot) return HookResult.Continue;
         var reason = @event.Reason;
         var steamid2 = (player.AuthorizedSteamID != null) ? player.AuthorizedSteamID.SteamId2 : Localizer["invalid.steamid"];;
         var Name = player.PlayerName;
@@ -101,7 +101,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             
             if (LoopConnections.ContainsKey(player.SteamID))
             {
-                return HookResult.Handled;
+                HookResult.Continue;
             }
         }
 
@@ -116,7 +116,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, country);
         }
 
-        return HookResult.Handled;
+        HookResult.Continue;
     }
 
     public string GetCountry(string ipAddress)
