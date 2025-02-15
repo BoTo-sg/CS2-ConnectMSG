@@ -63,7 +63,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
 
         Console.WriteLine($"[{ModuleName}] {Name} has connected!");
-        Server.PrintToChatAll($"{Localizer["playerconnect", Name, country]}");
+        Server.PrintToChatAll($"{Localizer["playerconnect", Name, player.SteamID, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
@@ -120,7 +120,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
-        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, country]}");
+        Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, player.SteamID, country]}");
 
         if (Config.LogMessagesToDiscord)
         {
