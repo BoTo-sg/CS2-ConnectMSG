@@ -41,8 +41,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
-        if (@event == null) return
-            HookResult.Continue;
+        if (@event == null)
+            return HookResult.Continue;
 
         var player = @event.Userid;
 
@@ -78,7 +78,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             });
         }*/
 
-        HookResult.Continue;
+        return HookResult.Continue;
     }
 
     [GameEventHandler(HookMode.Pre)]
@@ -108,7 +108,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             
             if (LoopConnections.ContainsKey(player.SteamID))
             {
-                HookResult.Continue;
+                return HookResult.Continue;
             }
         }
 
@@ -123,7 +123,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, country);
         }
 
-        HookResult.Continue;
+        return HookResult.Continue;
     }
 
     public string GetCountry(string ipAddress)
