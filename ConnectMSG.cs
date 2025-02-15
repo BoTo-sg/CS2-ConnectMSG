@@ -161,8 +161,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 title = $"{Localizer["Discord.ConnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
-                color = 65280,
-                footer = new
+                color = 65280
+                //footer = new
                 
                 /*{
                     text = $"{Localizer["Discord.Footer"]}"
@@ -176,7 +176,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-
             var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
 
             if (!response.IsSuccessStatusCode)
@@ -195,7 +194,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 title = $"{Localizer["Discord.DisconnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
-                color = 16711680,
+                color = 16711680
                 
                 /*footer = new
                 {
@@ -210,7 +209,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-
             var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
 
             if (!response.IsSuccessStatusCode)
