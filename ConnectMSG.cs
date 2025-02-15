@@ -100,9 +100,9 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         if (player == null || !player.IsValid || player.IsBot) return HookResult.Handled;
         var reason = @event.Reason;
         var Name = player.PlayerName;
-        var DisconnectReason = reason.NetworkDisconnectionReason;
 
         string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
+        string disconnectReason = NetworkDisconnectionReasonHelper.GetDisconnectReasonString((ENetworkDisconnectionReason)reason);
         string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
         if (reason == 54 || reason == 55 || reason == 57)
@@ -125,7 +125,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
         if (Config.LogMessagesToDiscord)
         {
-            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, DisconnectReason, country);
+            _ = SendWebhookMessageAsEmbedDisconnected(player.PlayerName, player.SteamID, reason, country);
         }
 
         return HookResult.Handled;
