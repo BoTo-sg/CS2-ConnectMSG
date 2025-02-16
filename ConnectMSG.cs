@@ -65,10 +65,10 @@ public class ConnectMSG : BasePlugin
         //Console.WriteLine($"[{ModuleName}] {Name} has connected!");
         Server.PrintToChatAll($"{Localizer["playerconnect", Name, steamid2, country]}");
 
-        if (Config.LogMessagesToDiscord)
+        /*if (Config.LogMessagesToDiscord)
         {
             _ = SendWebhookMessageAsEmbedConnected(player.PlayerName, player.SteamID, country);
-        }
+        }*/
 
         /*if (Config.PlayerWelcomeMessage)
         {
