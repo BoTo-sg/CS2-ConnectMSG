@@ -14,13 +14,13 @@ using System.Xml.Linq;
 
 namespace ConnectMSG;
 
-public class ConnectMSGConfig : BasePluginConfig
+/*public class ConnectMSGConfig : BasePluginConfig
 {
     //[JsonPropertyName("PlayerWelcomeMessage")] public bool PlayerWelcomeMessage { get; set; } = true;
     //[JsonPropertyName("Timer")] public float Timer { get; set; } = 5.0f;
     [JsonPropertyName("LogMessagesToDiscord")] public bool LogMessagesToDiscord { get; set; } = true;
     [JsonPropertyName("DiscordWebhook")] public string DiscordWebhook { get; set; } = "";
-}
+}*/
 
 public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 {
