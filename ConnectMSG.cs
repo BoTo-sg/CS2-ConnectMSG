@@ -14,15 +14,16 @@ using System.Xml.Linq;
 
 namespace ConnectMSG;
 
-public class ConnectMSGConfig : BasePluginConfig
+/*public class ConnectMSGConfig : BasePluginConfig
 {
     //[JsonPropertyName("PlayerWelcomeMessage")] public bool PlayerWelcomeMessage { get; set; } = true;
     //[JsonPropertyName("Timer")] public float Timer { get; set; } = 5.0f;
     [JsonPropertyName("LogMessagesToDiscord")] public bool LogMessagesToDiscord { get; set; } = true;
     [JsonPropertyName("DiscordWebhook")] public string DiscordWebhook { get; set; } = "";
-}
+}*/
 
-public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
+//public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
+public class ConnectMSG : BasePlugin
 {
     public override string ModuleName => "ConnectMSG";
     public override string ModuleDescription => "Simple connect/disconnect messages";
@@ -31,12 +32,12 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
     public static Dictionary<ulong, bool> LoopConnections = new Dictionary<ulong, bool>();
 
-    public ConnectMSGConfig Config { get; set; } = new();
+    /*public ConnectMSGConfig Config { get; set; } = new();
 
     public void OnConfigParsed(ConnectMSGConfig config)
     {
         Config = config;
-    }
+    }*/
 
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
