@@ -171,7 +171,7 @@ public class ConnectMSG : BasePlugin
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
+            //var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -205,7 +205,7 @@ public class ConnectMSG : BasePlugin
 
             var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
+            //var response = await httpClient.PostAsync(Config.DiscordWebhook, content);
 
             if (!response.IsSuccessStatusCode)
             {
