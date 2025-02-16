@@ -50,7 +50,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         if (player == null || !player.IsValid || player.IsBot)
             return HookResult.Continue;
 
-        //var steamid = player.SteamID;
+        var steamid = player.SteamID;
         var steamid2 = player.AuthorizedSteamID.SteamId2;
         var Name = player.PlayerName;
 
