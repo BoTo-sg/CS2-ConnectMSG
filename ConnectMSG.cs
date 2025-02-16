@@ -92,7 +92,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         return HookResult.Continue;
     }
 
-    [GameEventHandler(HookMode.Pre)]
+    [GameEventHandler]
     private HookResult OnPlayerDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
     {
         if (@event == null)
