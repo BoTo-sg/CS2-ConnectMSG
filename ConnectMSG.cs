@@ -117,8 +117,8 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         info.DontBroadcast = true;
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
+        //Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country} ({disconnectReason})!");
         Server.PrintToChatAll($"{Localizer["playerdisconnect", Name, steamid2, country, disconnectReason]}");
-        Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country} ({disconnectReason})!");
 
         if (Config.LogMessagesToDiscord)
         {
@@ -154,6 +154,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         {
             var embed = new
             {
+                type = "rich",
                 title = $"{Localizer["Discord.ConnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.ConnectDescription", country, steamID]}",
@@ -187,6 +188,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         {
             var embed = new
             {
+                type = "rich",
                 title = $"{Localizer["Discord.DisconnectTitle", playerName]}",
                 url = $"https://steamcommunity.com/profiles/{steamID}",
                 description = $"{Localizer["Discord.DisconnectDescription", country, steamID, reason]}",
