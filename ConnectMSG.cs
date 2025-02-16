@@ -89,15 +89,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
             return HookResult.Continue;
 
         info.DontBroadcast = true;
-        return HookResult.Continue;
-    }
-
-    [GameEventHandler]
-    private HookResult OnPlayerDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
-    {
-        if (@event == null)
-            return HookResult.Continue;
-
         var player = @event.Userid;
 
         if (player == null || !player.IsValid || player.IsBot)
@@ -123,8 +114,6 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
                 return HookResult.Continue;
             }
         }
-
-        info.DontBroadcast = true;
 
         //Console.WriteLine($"[{ModuleName}] {Name} has disconnected!");
         //Console.WriteLine($"[{ModuleName}] {Name} [{steamid2}] has disconnected from {country} ({disconnectReason})!");
