@@ -1,6 +1,6 @@
 {
-  "playerconnect": "{purple}{0} {green}connected [{1}]",
-  "playerdisconnect": "{purple}{0} {red}disconnected [{1}]",
+  "playerconnect": "{green}{0} {lightpurple}[{1}] {green}connected from {lightpurple}{2}",
+  "playerdisconnect": "{green}{0} {lightpurple}[{1}] {green}disconnected from {lightpurple}{2} {lightred}({3})",
   "playerwelcomemsg": "Hi {purple}{0}{default}, Welcome to {blue}My server{default}. Hope you enjoy!",
   "playerwelcomemsgnextline": "{default}Please {green}read our rules{default}.",
 
