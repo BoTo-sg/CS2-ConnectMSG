@@ -31,12 +31,12 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
 
     public static Dictionary<ulong, bool> LoopConnections = new Dictionary<ulong, bool>();
 
-    public ConnectMSGConfig Config { get; set; } = new();
+    /*public ConnectMSGConfig Config { get; set; } = new();
 
     public void OnConfigParsed(ConnectMSGConfig config)
     {
         Config = config;
-    }
+    }*/
 
     [GameEventHandler]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
@@ -49,7 +49,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         if (player == null || !player.IsValid || player.IsBot)
             return HookResult.Continue;
 
-        var steamid = player.SteamID;
+        //var steamid = player.SteamID;
         var steamid2 = player.AuthorizedSteamID.SteamId2;
         var Name = player.PlayerName;
 
