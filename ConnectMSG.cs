@@ -53,7 +53,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         var steamid2 = player.AuthorizedSteamID.SteamId2;
         var Name = player.PlayerName;
 
-        string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown");
+        string country = GetCountry(player.IpAddress?.Split(":")[0] ?? "Unknown Country");
         //string playerip = player.IpAddress?.Split(":")[0] ?? "Unknown";
 
         /*if (LoopConnections.ContainsKey(steamid))
