@@ -39,7 +39,7 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         Config = config;
     }
 
-    [GameEventHandler]
+    [GameEventHandler(HookMode.Pre)]
     public HookResult OnPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
         if (@event == null)
@@ -82,13 +82,13 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         return HookResult.Continue;
     }
 
-    [GameEventHandler(HookMode.Pre)]
-    public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
+    [GameEventHandler]
+    public HookResult OnPlayerDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
     {
         if (@event == null)
             return HookResult.Continue;
 
-        info.DontBroadcast = true;
+        //info.DontBroadcast = true;
         var player = @event.Userid;
 
         if (player == null || !player.IsValid || player.IsBot)
@@ -125,6 +125,16 @@ public class ConnectMSG : BasePlugin, IPluginConfig<ConnectMSGConfig>
         }
 
         return HookResult.Continue;
+    }
+
+    [GameEventHandler(HookMode.Pre)]
+    public HookResult OnPlayerDisconnectPre(EventPlayerDisconnect @event, GameEventInfo info)
+    {
+        if (@event == null)
+            return HookResult.Handled;
+
+        info.DontBroadcast = true;
+        return HookResult.Handled;
     }
 
     public string GetCountry(string ipAddress)
